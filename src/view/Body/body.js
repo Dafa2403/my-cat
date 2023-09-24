@@ -8,11 +8,12 @@ import { UserSearch } from "../../Context/context";
 function Body() {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [img, setImg] = useState([]);
   const [limit, setLimit] = useState(10);
   const userSearch = UserSearch();
   const { dataSearch } = userSearch;
 
-  const arr = [];
+  let arr = [];
   const api_key =
     "live_MA3BQI7c6Uz03lYO6wmN4WwRk4Pa63o092vNbLRGEnfYLxq3tWHR3Q3KzVyHw0Zg";
 
@@ -29,9 +30,9 @@ function Body() {
       axios.get(`breeds?limit=${limit}&api_key=${api_key}`).then((res) => {
         setData(res.data);
       });
-    }, 1000);
+    }, 1500);
   };
-  console.log(data);
+  console.log(img);
   return (
     <div className="conBody">
       <InfiniteScroll
@@ -46,7 +47,7 @@ function Body() {
               <Card>
                 <Card.Img
                   variant="top"
-                  src={item.image.url}
+                  src={item.image?.url}
                   style={{ objectFit: "contain", width: "100%", height: 200 }}
                 />
                 <Card.Body>
