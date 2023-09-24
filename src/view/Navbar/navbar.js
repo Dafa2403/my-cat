@@ -29,7 +29,7 @@ function Navigation() {
         style={{ padding: "1rem" }}
         fixed="top"
       >
-        <Navbar.Brand href="#">My-Cat</Navbar.Brand>
+        <Navbar.Brand href="/">My-Cat</Navbar.Brand>
         <Form inline>
           <Row>
             <Col style={{ display: "flex", flexDirection: "row" }} xs="auto">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Card, Collapse, Button } from "react-bootstrap";
+import { Col, Row, Card, Collapse, Button, Accordion } from "react-bootstrap";
 import "./styles.css";
 import axios from "../../API/axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -52,17 +52,22 @@ function Body() {
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
-                  <Button
+                  {/* <Button
                     onClick={() => setOpen(!open)}
                     aria-controls="example-collapse-text"
                     aria-expanded={open}
                   >
                     Detail
-                  </Button>
+                  </Button> */}
                   <Card.Text>
-                    <Collapse in={open}>
-                      <span>{item.description}</span>
-                    </Collapse>
+                    <Accordion>
+                      <Accordion.Item eventKey={index}>
+                        <Accordion.Header>Detail</Accordion.Header>
+                        <Accordion.Body>
+                          <span>{item.description}</span>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
                   </Card.Text>
                 </Card.Body>
               </Card>
