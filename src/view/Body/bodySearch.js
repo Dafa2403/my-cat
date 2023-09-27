@@ -11,6 +11,7 @@ function Search() {
   const [itm, setItem] = useState([]);
   const userSearch = UserSearch();
   const { dataSearch } = userSearch;
+  const [visible, setVisible] = useState("none");
 
   useEffect(() => {
     setData(dataSearch);
@@ -18,18 +19,28 @@ function Search() {
       const element = dataSearch[i];
       setItem(element.breeds);
     }
+    if (dataSearch.length === 0) {
+      setVisible("visible");
+    } else {
+      setVisible("hidden");
+    }
   }, []);
 
-  console.log("test", itm.deskrip);
+  console.log(visible);
+
   return (
     <div className="conBody">
       <Row className="row-cols-4 d-flex justify-content-center">
+        <span style={{ visibility: `${visible}`, position: "fixed" }}>
+          item tidak ditemukan, search dengan ID
+        </span>
+
         {dataSearch.map((item, index) => (
           <Col style={{ marginBottom: 10 }} key={index}>
             <Card>
               <Card.Img variant="top" src={item?.url} />
               <Card.Body>
-                <Card.Title>{itm[index].name}</Card.Title>
+                <Card.Title>{item.breeds[index]?.name}</Card.Title>
                 <Button
                   onClick={() => setOpen(!open)}
                   aria-controls="example-collapse-text"
@@ -39,7 +50,7 @@ function Search() {
                 </Button>
                 <Card.Text>
                   <Collapse in={open}>
-                    <span>{itm[index].description}</span>
+                    <span>{item.breeds[index]?.description}</span>
                   </Collapse>
                 </Card.Text>
               </Card.Body>
