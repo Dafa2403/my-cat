@@ -6,14 +6,11 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { UserSearch } from "../../Context/context";
 
 function Body() {
-  const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [img, setImg] = useState([]);
   const [limit, setLimit] = useState(10);
   const userSearch = UserSearch();
   const { dataSearch } = userSearch;
 
-  let arr = [];
   const api_key =
     "live_MA3BQI7c6Uz03lYO6wmN4WwRk4Pa63o092vNbLRGEnfYLxq3tWHR3Q3KzVyHw0Zg";
 
@@ -32,7 +29,6 @@ function Body() {
       });
     }, 1500);
   };
-  console.log(img);
   return (
     <div className="conBody">
       <InfiniteScroll

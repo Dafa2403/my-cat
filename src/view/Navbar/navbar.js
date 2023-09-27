@@ -11,13 +11,19 @@ function Navigation() {
   const [input, setInput] = useState("");
   const api_key =
     "live_MA3BQI7c6Uz03lYO6wmN4WwRk4Pa63o092vNbLRGEnfYLxq3tWHR3Q3KzVyHw0Zg";
-  const submitSearch = () => {
-    axios
-      .get(`images/search?breed_ids=${input}&api_key=${api_key}`)
-      .then((res) => {
-        setDataSearch(res.data);
-        navigate("/Search");
-      });
+  const submitSearch = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.get(
+      `images/search?breed_ids=${input}&api_key=${api_key}`
+    );
+
+    setDataSearch(res.data);
+    navigate("/Search");
+
+    if (input === "") {
+      navigate("/");
+    }
   };
   return (
     <div>
@@ -41,7 +47,9 @@ function Navigation() {
                 onChange={(e) => setInput(e.target.value)}
                 style={{ marginRight: 5 }}
               />
-              <Button onClick={submitSearch}>Search</Button>
+              <Button onClick={submitSearch} type="submit">
+                Search
+              </Button>
             </Col>
           </Row>
         </Form>
