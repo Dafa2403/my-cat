@@ -48,13 +48,6 @@ function Body() {
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
-                  {/* <Button
-                    onClick={() => setOpen(!open)}
-                    aria-controls="example-collapse-text"
-                    aria-expanded={open}
-                  >
-                    Detail
-                  </Button> */}
                   <Card.Text>
                     <Accordion>
                       <Accordion.Item eventKey={index}>
