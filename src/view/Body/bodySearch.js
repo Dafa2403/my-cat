@@ -8,28 +8,28 @@ import { UserSearch } from "../../Context/context";
 function Search() {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const [deskrip, setDeskrip] = useState("");
+  const [itm, setItem] = useState([]);
   const userSearch = UserSearch();
   const { dataSearch } = userSearch;
-  console.log(dataSearch);
 
   useEffect(() => {
     setData(dataSearch);
-    setName(dataSearch[0].breeds[0].name);
-    setDeskrip(dataSearch[0].breeds[0].description);
+    for (let i = 0; i < dataSearch.length; i++) {
+      const element = dataSearch[i];
+      setItem(element.breeds);
+    }
   }, []);
 
-  console.log("test", name);
+  console.log("test", itm.deskrip);
   return (
     <div className="conBody">
       <Row className="row-cols-4 d-flex justify-content-center">
         {dataSearch.map((item, index) => (
           <Col style={{ marginBottom: 10 }} key={index}>
             <Card>
-              <Card.Img variant="top" src={item.url} />
+              <Card.Img variant="top" src={item?.url} />
               <Card.Body>
-                <Card.Title>{name}</Card.Title>
+                <Card.Title>{itm[index].name}</Card.Title>
                 <Button
                   onClick={() => setOpen(!open)}
                   aria-controls="example-collapse-text"
@@ -39,7 +39,7 @@ function Search() {
                 </Button>
                 <Card.Text>
                   <Collapse in={open}>
-                    <span>{deskrip}</span>
+                    <span>{itm[index].description}</span>
                   </Collapse>
                 </Card.Text>
               </Card.Body>
