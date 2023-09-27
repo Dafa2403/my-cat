@@ -44,7 +44,7 @@ function Body() {
                 <Card.Img
                   variant="top"
                   src={item.image?.url}
-                  style={{ objectFit: "contain", width: "100%", height: 200 }}
+                  style={{ objectFit: "contain", width: "100%", height: 300 }}
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Card, Collapse, Button } from "react-bootstrap";
+import { Col, Row, Card, Accordion } from "react-bootstrap";
 import "./styles.css";
 import axios from "../../API/axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -29,20 +29,23 @@ function Search() {
         {dataSearch.map((item, index) => (
           <Col style={{ marginBottom: 10 }} key={index}>
             <Card>
-              <Card.Img variant="top" src={item?.url} />
+              <Card.Img
+                variant="top"
+                src={item?.url}
+                style={{ objectFit: "contain", width: "100%", height: 300 }}
+              />
               <Card.Body>
                 <Card.Title>{item.breeds[index]?.name}</Card.Title>
-                <Button
-                  onClick={() => setOpen(!open)}
-                  aria-controls="example-collapse-text"
-                  aria-expanded={open}
-                >
-                  Detail
-                </Button>
+
                 <Card.Text>
-                  <Collapse in={open}>
-                    <span>{item.breeds[index]?.description}</span>
-                  </Collapse>
+                  <Accordion>
+                    <Accordion.Item eventKey={index}>
+                      <Accordion.Header>Detail</Accordion.Header>
+                      <Accordion.Body>
+                        <span>{item.breeds[index]?.description}</span>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
                 </Card.Text>
               </Card.Body>
             </Card>
