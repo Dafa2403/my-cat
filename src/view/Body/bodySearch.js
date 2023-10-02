@@ -26,31 +26,29 @@ function Search() {
           item tidak ditemukan, search dengan ID
         </span>
 
-        {dataSearch.map((item, index) => (
-          <Col style={{ marginBottom: 10 }} key={index}>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={item?.url}
-                style={{ objectFit: "contain", width: "100%", height: 300 }}
-              />
-              <Card.Body>
-                <Card.Title>{item.breeds[index]?.name}</Card.Title>
+        <Col style={{ marginBottom: 10 }}>
+          <Card>
+            <Card.Img
+              variant="top"
+              src={dataSearch.image?.url}
+              style={{ objectFit: "contain", width: "100%", height: 300 }}
+            />
+            <Card.Body>
+              <Card.Title>{dataSearch.name}</Card.Title>
 
-                <Card.Text>
-                  <Accordion>
-                    <Accordion.Item eventKey={index}>
-                      <Accordion.Header>Detail</Accordion.Header>
-                      <Accordion.Body>
-                        <span>{item.breeds[index]?.description}</span>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+              <Card.Text>
+                <Accordion>
+                  <Accordion.Item>
+                    <Accordion.Header>Detail</Accordion.Header>
+                    <Accordion.Body>
+                      <span>{dataSearch.description}</span>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </div>
   );

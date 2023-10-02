@@ -39,7 +39,7 @@ function Body() {
       >
         <Row className="row-cols-4 d-flex justify-content-center">
           {data.map((item, index) => (
-            <Col style={{ marginBottom: 10 }} key={index}>
+            <Col style={{ marginBottom: 5 }} key={index}>
               <Card>
                 <Card.Img
                   variant="top"

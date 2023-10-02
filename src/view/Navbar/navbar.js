@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Row, Col, Button, Nav, Navbar } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Form, Row, Col, Button, Nav, Navbar, Alert } from "react-bootstrap";
 import { UserSearch } from "../../Context/context";
 import axios from "../../API/axios";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -7,23 +7,36 @@ import { Navigate, useNavigate } from "react-router-dom";
 function Navigation() {
   const searchUser = UserSearch();
   const navigate = useNavigate();
-  const { setDataSearch } = searchUser;
+  const { dataSearch, setDataSearch } = searchUser;
+  const [data, setData] = useState([]);
   const [input, setInput] = useState("");
   const api_key =
     "live_MA3BQI7c6Uz03lYO6wmN4WwRk4Pa63o092vNbLRGEnfYLxq3tWHR3Q3KzVyHw0Zg";
+  useEffect(() => {
+    axios.get(`breeds?&api_key=${api_key}`).then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   const submitSearch = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get(
-      `images/search?breed_ids=${input}&api_key=${api_key}`
-    );
+    // const res = await axios.get(
+    //   `images/search?breed_ids=${input}&api_key=${api_key}`
+    // );
 
-    setDataSearch(res.data);
-    navigate("/Search");
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i];
 
-    if (input === "") {
-      navigate("/");
+      if (input.replace(/^./, input[0].toLowerCase()) === element.id) {
+        setDataSearch(element);
+      } else if (element.name === input.replace(/^./, input[0].toUpperCase())) {
+        setDataSearch(element);
+      } else {
+        navigate("/");
+      }
     }
+    navigate("/Search");
   };
   return (
     <div>
@@ -54,6 +67,7 @@ function Navigation() {
           </Row>
         </Form>
       </Navbar>
+      {/* <Alert>Hasil tidak ditemukan</Alert> */}
     </div>
   );
 }
